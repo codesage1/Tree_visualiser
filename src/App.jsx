@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import CircleWithNumber from './components/TreeVisualizer/CircleWithNumber'
+import TreeNode from './components/TreeVisualizer/TreeNode'
+import TreeVisualiser from './components/TreeVisualizer/TreeVisualiser'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,10 +9,7 @@ function App() {
   return (
     <>
       <h1>Simple Circle with Number</h1>
-      {/* Use the component and pass different numbers */}
-      <CircleWithNumber number={1} />
-      <CircleWithNumber number={5} />
-      <CircleWithNumber number={10} />
+      <TreeVisualiser/>
     </>
   )
 }

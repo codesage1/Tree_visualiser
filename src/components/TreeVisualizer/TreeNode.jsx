@@ -1,6 +1,6 @@
 import React from "react";
 
-const CircleWithNumber = ({ number }) => {
+const TreeNode = ({ number,x,y }) => {
   // Fixed values for the circle
   const radius = 50; // Circle radius
   const borderColor = "white"; // Border color
@@ -9,7 +9,17 @@ const CircleWithNumber = ({ number }) => {
   const strokeWidth = 5; // Border thickness
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox={`0 0 ${size} ${size}`}
+      style={{
+        position: 'absolute',
+        left: `${x}px`,
+        top: `${y}px`,
+        transition: 'all 0.3s ease-in-out'
+      }}
+    >
       {/* Circle with border */}
       <circle
         cx={radius} // Center X
@@ -35,4 +45,4 @@ const CircleWithNumber = ({ number }) => {
   );
 };
 
-export default CircleWithNumber;
+export default TreeNode;
