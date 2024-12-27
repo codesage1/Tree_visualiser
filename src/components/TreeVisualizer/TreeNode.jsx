@@ -1,43 +1,40 @@
-import React from "react";
+import React from 'react';
 
-const TreeNode = ({ number,x,y }) => {
-  // Fixed values for the circle
-  const radius = 50; // Circle radius
-  const borderColor = "white"; // Border color
-  const textColor = "white"; // Text color (matches the border)
-  const size = radius * 2; // SVG size (diameter)
-  const strokeWidth = 5; // Border thickness
+const TreeNode = ({ number, x, y }) => {
+  const radius = 30;
+  const borderColor = 'white';
+  const textColor = 'white';
+  const size = radius * 2;
+  const strokeWidth = 3;
 
   return (
-    <svg 
-      width={size} 
-      height={size} 
+    <svg
+      width={size}
+      height={size}
       viewBox={`0 0 ${size} ${size}`}
       style={{
         position: 'absolute',
         left: `${x}px`,
         top: `${y}px`,
-        transition: 'all 0.3s ease-in-out'
+        transition: 'all 0.3s ease-in-out',
       }}
     >
-      {/* Circle with border */}
       <circle
-        cx={radius} // Center X
-        cy={radius} // Center Y
-        r={radius - strokeWidth / 2} // Adjust radius for border to fit inside the SVG
-        fill="none" // No fill
-        stroke={borderColor} // Border color
-        strokeWidth={strokeWidth} // Border thickness
+        cx={radius}
+        cy={radius}
+        r={radius - strokeWidth / 2}
+        fill="none"
+        stroke={borderColor}
+        strokeWidth={strokeWidth}
       />
-      {/* Number inside the circle */}
       <text
-        x="50%" // Center horizontally
-        y="50%" // Center vertically
-        textAnchor="middle" // Align text center horizontally
-        dominantBaseline="middle" // Align text center vertically
-        fill={textColor} // Text color
-        fontSize="30" // Font size
-        fontFamily="Arial, sans-serif" // Font style
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fill={textColor}
+        fontSize="16"
+        fontFamily="Arial, sans-serif"
       >
         {number}
       </text>

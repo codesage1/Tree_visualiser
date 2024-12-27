@@ -105,14 +105,14 @@ class BinaryTree{
 
         const nodePositions = [];
         const levelWidth = 80;  // Horizontal spacing between nodes
-        const levelHeight = 60; // Vertical spacing between levels
+        const levelHeight = 100; // Vertical spacing between levels
 
         function calculatePositions(node, level, position, width) {
             if (!node) return;
 
             // Calculate x and y coordinates
             const x = position;
-            const y = level * levelHeight;
+            let y = level * levelHeight + 50;
 
             // Store node data and its coordinates
             nodePositions.push({
@@ -129,18 +129,9 @@ class BinaryTree{
             calculatePositions(node.right, level + 1, position + nextWidth, nextWidth);
         }
 
-        calculatePositions(this.root, 0, 400, levelWidth * 4); // Start at x=400 for center positioning
+        calculatePositions(this.root,0, 400, levelWidth * 4); // Start at x=400 for center positioning
         return nodePositions;
     }
 }
 
-
-const tree = new BinaryTree();
-tree.insert(1);
-tree.insert(2);
-tree.insert(3);
-tree.insert(4);
-tree.insert(5);
-tree.deleteNode(6);
-tree.deleteNode(1);
-console.log(tree.getTreeCoordinates());
+export {BinaryTree, TreeNode};

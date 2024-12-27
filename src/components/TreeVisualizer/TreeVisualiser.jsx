@@ -1,23 +1,82 @@
-import { useState } from "react"
-import TreeNode from "./TreeNode"
-const TreeVisualiser = () => {
-    const [nodes, setNodes] = useState([
-        {id: 1, value: 5, x: 200, y: 50}, // root
-        {id: 2, value: 3, x: 100, y: 150}, // left child
-        {id: 3, value: 7, x: 300, y: 150}, // right child
-    ])
+// TreeVisualiser.jsx
+import React, { useState, useEffect } from 'react';
+import TreeNode from './TreeNode';
+import TreeConnection from './TreeConnection';
+import TreeControls from './TreeControls';
+import { BinaryTree } from '../../utils/binarytree';
 
-    return(
-        <div style = {{position: 'relative', width: '800px', height: '600px'}}>
-            {nodes.map(node => (
-                <TreeNode 
-                    key = {node.id}
-                    number = {node.value}
-                    x = {node.x}
-                    y = {node.y}
-                />
-            ))}
+const TreeVisualiser = () => {
+    const [tree] = useState(() => new BinaryTree());
+    const [nodes, setNodes] = useState([]);
+
+    const updateNodes = () => {
+        const coordinates = tree.getTreeCoordinates();
+        setNodes(coordinates);
+    };
+
+    const handleInsert = (value) => {
+        tree.insert(value);
+        updateNodes();
+    };
+
+    const handleDelete = (value) => {
+        tree.deleteNode(value);
+        updateNodes();
+    };
+
+    const handleClear = () => {
+        tree.root = null;
+        updateNodes();
+    };
+
+    const handleFill = () => {
+        handleClear();
+        for(let i = 1; i <= 10; i++){
+            tree.insert(i);
+        }
+        updateNodes();
+    };
+
+    useEffect(() => {
+        // Initialize with some example nodes
+        handleInsert(5);
+        handleInsert(3);
+        handleInsert(7);
+    }, []);
+
+    return (
+        <div className="flex flex-col items-center">
+            <TreeControls
+                onInsert={handleInsert}
+                onDelete={handleDelete}
+                onClear={handleClear}
+                onFill={handleFill}
+            />
+            <div className="relative w-[800px] h-[600px] bg-gray-900 rounded-lg">
+                <svg className="w-full h-full">
+                    {nodes.map((node, index) => (
+                        node.parentX !== null && (
+                            <TreeConnection
+                                key={`connection-${index}`}
+                                startX={node.parentX}
+                                startY={node.parentY}
+                                endX={node.x}
+                                endY={node.y}
+                            />
+                        )
+                    ))}
+                </svg>
+                {nodes.map((node, index) => (
+                    <TreeNode
+                        key={`node-${index}`}
+                        number={node.data}
+                        x={node.x - 30}
+                        y={node.y}
+                    />
+                ))}
+            </div>
         </div>
-    )
-}
-export default TreeVisualiser
+    );
+};
+
+export default TreeVisualiser;

@@ -8,7 +8,6 @@ function App() {
 
   return (
     <>
-      <h1>Simple Circle with Number</h1>
       <TreeVisualiser/>
     </>
   )
